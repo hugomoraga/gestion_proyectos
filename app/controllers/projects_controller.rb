@@ -5,16 +5,21 @@ class ProjectsController < ApplicationController
   
   # GET /projects
   # GET /projects.json
-  def index
-    @proyect = Project.new
-    if params[:state].present?
-      @projects = Project.where(state: params[:state])
-    else
-      @projects = Project.all
+    def index
+      @q = params[:q]
+      if @q
+        @projects = Project.where(state: @q)
+      else
+        @projects = Project.all
+      end
+      if @q == 'todos'
+        @projects = Project.all
+      end
+
+
     end
-  end
-  
-  
+
+
 def show
 end
 

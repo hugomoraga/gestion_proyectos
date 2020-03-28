@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource :except => [:index, :show]
+
   
   
   # GET /projects
@@ -12,6 +14,7 @@ class ProjectsController < ApplicationController
       else
         @projects = Project.all
       end
+      
       if @q == 'todos'
         @projects = Project.all
       end
